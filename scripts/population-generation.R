@@ -13,14 +13,13 @@ L3 <- sample(x = score_values, size = pop_size, replace = TRUE) + (-1 * female +
 X1 <- rbinom(n = pop_size, size = 1, p = (0.2 + 0.6*female))
 X2 <- rbinom(n = pop_size, size = 1, p = (0.2 + 0.6*(-1 * female + 1)))
 
+# turn vectors into DF
 df <- data.frame(female, L1, L2, L3, X1, X2)
 
+# Information about the DF
 summary(df)
+summary(df, filter(female == 0))
+summary(df, filter(female == 1))
 
-df %>%
-  filter(female == 0) %>%
-  summary()
-
-df %>%
-  filter(female == 1) %>%
-  summary()
+# Save to csv
+write.csv(x = df, file = "data/population.csv")
