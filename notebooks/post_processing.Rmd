@@ -1,0 +1,100 @@
+---
+title: "Post-processing measures"
+output: html_notebook
+---
+# Imports
+```{r}
+library(fairmodels)
+library(tidymodels)
+library(rpart)
+library(discrim)
+source("../scripts/metrics_on_dataset.R")
+```
+## Data
+```{r}
+df <- read_rds("../data/selection.rds") %>%
+  select(-gender, -rating) %>%
+  mutate(accepted = as.factor(accepted))
+```
+
+# Naive Bayes ensamble
+## Setup
+```{r}
+df_dutch <- filter(df, nationality == "Dutch")
+df_non_dutch <- filter(df, nationality != "Dutch")
+
+model <- naive_Bayes()
+
+df_disc <- function(df){
+  summary_true <- group_fairness(df, nationality, predicted)[[1]] %>%
+    filter(predicted == "TRUE")
+  max_val <- max(select(summary_true, proportion))
+  min_val <- min(select(summary_true, proportion))
+  
+  list(disc = max_val - min_val, n = sum(select(summary_true, total)))
+}
+```
+
+```{r}
+cutoff <- 0.5
+
+dutch_model <- model %>%
+  fit(accepted ~ test_score + english_cert + extracurricular, df_dutch)
+non_dutch_model <- model %>%
+  fit(accepted ~ test_score + english_cert + extracurricular, df_non_dutch)
+
+print(dutch_model)
+
+dutch_prediction_TRUE <- predict(dutch_model, df_dutch, type="prob")[[".pred_TRUE"]]
+non_dutch_prediction_TRUE <- predict(non_dutch_model, df_non_dutch, type="prob")[[".pred_TRUE"]]
+
+hist(dutch_prediction_TRUE)
+hist(non_dutch_prediction_TRUE)
+
+df_dutch["predicted"] <- as.factor(dutch_prediction_TRUE >= cutoff)
+df_non_dutch["predicted"] <- as.factor(non_dutch_prediction_TRUE >= cutoff)
+
+joined_df = bind_rows(df_dutch, df_non_dutch)
+
+result <- df_disc(joined_df)
+factor_dutch <- 1
+factor_non_dutch <- 1
+original_n <- sum(joined_df$accepted == "TRUE")
+
+i <- 0
+while (result$disc > 0.01) {
+  # if (result$n > original_n) {
+  #   cutoff_dutch <- cutoff_dutch - 0.01
+  # } else if (result$n > original_n) {
+  #   cutoff_non_dutch <- cutoff_non_dutch + 0.01
+  # }
+  factor_dutch <- factor_dutch - 0.05
+  factor_non_dutch <- factor_non_dutch + 0.05
+  
+  dutch_prediction_TRUE <- predict(dutch_model, df_dutch, type="prob")[[".pred_TRUE"]]*factor_dutch 
+  non_dutch_prediction_TRUE <- predict(non_dutch_model, df_non_dutch, type="prob")[[".pred_TRUE"]]*factor_non_dutch
+  
+  df_dutch["predicted"] <- as.factor(dutch_prediction_TRUE>= cutoff)
+  df_non_dutch["predicted"] <- as.factor(non_dutch_prediction_TRUE >= cutoff)
+  
+  joined_df = bind_rows(df_dutch, df_non_dutch)
+  
+  result <- df_disc(joined_df)
+  print(result)
+  print(factor_dutch)
+  print(factor_non_dutch)
+  i <- i + 1
+  if (i == 20) {
+    break
+  }
+}
+
+hist(dutch_prediction_TRUE)
+hist(non_dutch_prediction_TRUE)
+```
+
+# Metrics
+```{r}
+print(group_fairness(joined_df, nationality, predicted)[[1]])
+```
+

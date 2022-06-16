@@ -1,0 +1,36 @@
+---
+title: "Dataset Description"
+output: html_notebook
+---
+
+# Imports
+```{r}
+library(fairmodels)
+library(tidymodels)
+library(rpart)
+library(discrim)
+source("../scripts/metrics_on_dataset.R")
+```
+
+# The Dataset
+```{r}
+df <- read_rds("../data/selection.rds")
+head(df, 10)
+```
+
+## Characteristics
+```{r}
+summary(df)
+summary(filter(df, accepted))
+summary(filter(df, !accepted))
+```
+
+
+# Metrics on the Dataset
+```{r}
+model <- decision_tree(mode = "classification")
+results <- all_metrics(df, model)
+print_all_metrics("Unmodified dataset", results)
+```
+
+
