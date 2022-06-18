@@ -28,7 +28,9 @@ group_fairness <- function(df, sensitive, outcome, fitted_model=NULL) {
 }
 
 causal_discrimination <- function(df, fitted_model){
-  # Determine the number of applicants who get a different outcome depending on their nationality
+  # Determine the number of applicants who get a different outcome depending on 
+  # their nationality in the fitted model.
+  
   pop_size <- nrow(df)
   
   # Flip nationalities
@@ -37,8 +39,9 @@ causal_discrimination <- function(df, fitted_model){
   
   # Add prediction column
   eval_df <- df %>% 
-    mutate(inverted_accepted = predict(fitted_model, inverted_df)[[".pred_class"]],
-           different = accepted != inverted_accepted)
+    mutate(predicted = predict(fitted_model, df)[[".pred_class"]],
+           inverted_predicted = predict(fitted_model, inverted_df)[[".pred_class"]],
+           different = predicted != inverted_predicted)
   
   list(sum(eval_df$different)/pop_size, eval_df)
 }

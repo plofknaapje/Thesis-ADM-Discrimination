@@ -18,12 +18,16 @@ df <- read_rds("../data/selection.rds") %>%
 ```
 
 # Naive Bayes ensamble
-## Setup
+## Functions
 ```{r}
-df_dutch <- filter(df, nationality == "Dutch")
-df_non_dutch <- filter(df, nationality != "Dutch")
-
-model <- naive_Bayes()
+adjust_fit <- function(cutoffs, direction){
+  if (direction == "up"){
+    cutoffs["Non_Dutch"] <- cutoffs["Non_Dutch"] - 0.01
+  } else if (direction == "down"){
+    cutoffs["Dutch"] <- cutoffs["Dutch"] + 0.01
+  }
+  cutoffs
+}
 
 df_disc <- function(df){
   summary_true <- group_fairness(df, nationality, predicted)[[1]] %>%
@@ -33,68 +37,93 @@ df_disc <- function(df){
   
   list(disc = max_val - min_val, n = sum(select(summary_true, total)))
 }
+
+predictions <- function(df, fitted_models, cutoffs) {
+  df_dutch <- filter(df, nationality == "Dutch")
+  df_non_dutch <- filter(df, nationality != "Dutch")
+  
+  predictions_dutch <- predict(fitted_models[["Dutch"]], df_dutch, type="prob")[".pred_TRUE"]
+  predictions_non_dutch <- predict(fitted_models[["Non_Dutch"]], df_non_dutch, type="prob")[".pred_TRUE"]
+  
+  df_dutch["predicted"] <- as.factor(predictions_dutch >= cutoffs["Dutch"])
+  df_non_dutch["predicted"] <- as.factor(predictions_non_dutch >= cutoffs["Non_Dutch"])
+
+  joined_df = bind_rows(df_dutch, df_non_dutch)
+}
+
+causal_discrimination_joined_model <- function(df, fitted_models, cutoffs) {
+  pop_size <- nrow(df)
+  
+  df_dutch <- filter(df, nationality == "Dutch")
+  df_non_dutch <- filter(df, nationality != "Dutch")
+  
+  predictions_dutch <- predict(fitted_models[["Dutch"]], df_dutch, type="prob")[".pred_TRUE"]
+  inv_predictions_dutch <- predict(fitted_models[["Non_Dutch"]], df_dutch, type="prob")[".pred_TRUE"]
+
+  predictions_non_dutch <- predict(fitted_models[["Non_Dutch"]], df_non_dutch, type="prob")[".pred_TRUE"]
+  inv_predictions_non_dutch <- predict(fitted_models[["Dutch"]], df_non_dutch, type="prob")[".pred_TRUE"]
+  
+  df_dutch["predicted"] <- as.factor(predictions_dutch >= cutoffs["Dutch"])
+  df_dutch["inv_predicted"] <- as.factor(inv_predictions_dutch >= cutoffs["Non_Dutch"])
+  df_non_dutch["predicted"] <- as.factor(predictions_non_dutch >= cutoffs["Non_Dutch"])
+  df_non_dutch["inv_predicted"] <- as.factor(inv_predictions_non_dutch >= cutoffs["Dutch"])
+
+  joined_df <- bind_rows(df_dutch, df_non_dutch) %>%
+    mutate(different = predicted != inv_predicted)
+
+  list(sum(joined_df$different)/pop_size, joined_df)
+}
+```
+
+## Setup
+```{r}
+original_n <- sum(df$accepted == "TRUE")
+
+df_dutch <- filter(df, nationality == "Dutch")
+df_non_dutch <- filter(df, nationality != "Dutch")
+
+model <- naive_Bayes()
 ```
 
 ```{r}
-cutoff <- 0.5
+cutoffs <- c(Dutch = 0.5, Non_Dutch = 0.5)
 
-dutch_model <- model %>%
-  fit(accepted ~ test_score + english_cert + extracurricular, df_dutch)
-non_dutch_model <- model %>%
-  fit(accepted ~ test_score + english_cert + extracurricular, df_non_dutch)
+models <- list(Dutch = model %>% 
+              fit(accepted ~ test_score + english_cert + extracurricular, df_dutch),
+            Non_Dutch = model %>% 
+              fit(accepted ~ test_score + english_cert + extracurricular, df_non_dutch))
 
-print(dutch_model)
+predictions_df = predictions(df, models, cutoffs)
 
-dutch_prediction_TRUE <- predict(dutch_model, df_dutch, type="prob")[[".pred_TRUE"]]
-non_dutch_prediction_TRUE <- predict(non_dutch_model, df_non_dutch, type="prob")[[".pred_TRUE"]]
+plot(filter(predictions_df, nationality == "Dutch") %>% select(predicted))
+plot(filter(predictions_df, nationality == "Non_Dutch") %>% select(predicted))
 
-hist(dutch_prediction_TRUE)
-hist(non_dutch_prediction_TRUE)
-
-df_dutch["predicted"] <- as.factor(dutch_prediction_TRUE >= cutoff)
-df_non_dutch["predicted"] <- as.factor(non_dutch_prediction_TRUE >= cutoff)
-
-joined_df = bind_rows(df_dutch, df_non_dutch)
-
-result <- df_disc(joined_df)
-factor_dutch <- 1
-factor_non_dutch <- 1
-original_n <- sum(joined_df$accepted == "TRUE")
+result <- df_disc(predictions_df)
 
 i <- 0
-while (result$disc > 0.01) {
-  # if (result$n > original_n) {
-  #   cutoff_dutch <- cutoff_dutch - 0.01
-  # } else if (result$n > original_n) {
-  #   cutoff_non_dutch <- cutoff_non_dutch + 0.01
-  # }
-  factor_dutch <- factor_dutch - 0.05
-  factor_non_dutch <- factor_non_dutch + 0.05
+while (result$disc > 0.02) {
   
-  dutch_prediction_TRUE <- predict(dutch_model, df_dutch, type="prob")[[".pred_TRUE"]]*factor_dutch 
-  non_dutch_prediction_TRUE <- predict(non_dutch_model, df_non_dutch, type="prob")[[".pred_TRUE"]]*factor_non_dutch
-  
-  df_dutch["predicted"] <- as.factor(dutch_prediction_TRUE>= cutoff)
-  df_non_dutch["predicted"] <- as.factor(non_dutch_prediction_TRUE >= cutoff)
-  
-  joined_df = bind_rows(df_dutch, df_non_dutch)
-  
-  result <- df_disc(joined_df)
-  print(result)
-  print(factor_dutch)
-  print(factor_non_dutch)
-  i <- i + 1
-  if (i == 20) {
-    break
+  if (result$n < original_n) {
+    cutoffs <- adjust_fit(cutoffs, "up")
+  } else {
+    cutoffs <- adjust_fit(cutoffs, "down")
   }
+  
+  predictions_df = predictions(df, models, cutoffs)
+  
+  result <- df_disc(predictions_df)
+  # print(result)
 }
 
-hist(dutch_prediction_TRUE)
-hist(non_dutch_prediction_TRUE)
+print(cutoffs)
+
+plot(filter(predictions_df, nationality == "Dutch") %>% select(predicted))
+plot(filter(predictions_df, nationality == "Non_Dutch") %>% select(predicted))
 ```
 
 # Metrics
 ```{r}
-print(group_fairness(joined_df, nationality, predicted)[[1]])
+print(group_fairness(predictions_df, nationality, predicted)[[1]])
+print(causal_discrimination_joined_model(df, models, cutoffs)[[1]])
 ```
 

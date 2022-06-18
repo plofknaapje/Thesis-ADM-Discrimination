@@ -31,19 +31,37 @@ df_disc <- function(df){
   max_val - min_val
 }
 
-adjust_fit <- function(model, direction){
-  fit_table <- model[["fit"]][["tables"]][["nationality"]]
-  CposSneg <- fit_table["TRUE", "Non_Dutch"]
-  CnegSpos <- fit_table["FALSE", "Dutch"]
+adjust_fit <- function(cutoffs, direction){
   if (direction == "up"){
-    fit_table["TRUE", "Non_Dutch"] <- CposSneg + 0.01 * CnegSpos
-    fit_table["FALSE", "Non_Dutch"] <- CposSneg - 0.01 * CnegSpos
+    cutoffs["Non_Dutch"] <- cutoffs["Non_Dutch"] - 0.01
   } else if (direction == "down"){
-    fit_table["FALSE", "Dutch"] <- CnegSpos + 0.01 * CposSneg
-    fit_table["TRUE", "Dutch"] <- CnegSpos - 0.01 * CposSneg
+    cutoffs["Dutch"] <- cutoffs["Dutch"] + 0.01
   }
-  model[["fit"]][["tables"]][["nationality"]] <- fit_table
-  model
+  cutoffs
+}
+
+nb_causal_discrimination <- function(df, fitted_model, cutoffs){
+  # Determine the number of applicants who get a different outcome depending on their nationality
+  pop_size <- nrow(df)
+  
+  # Flip nationalities
+  inverted_df <- df %>% 
+    mutate(nationality = ifelse(nationality == "Dutch", "Non_Dutch", "Dutch"))
+  
+  predictions <- predict(fitted_model, df, type = "prob")[[".pred_TRUE"]]
+  inverted_predictions <- predict(fitted_model, inverted_df, type = "prob")[[".pred_TRUE"]]
+  
+  # Add prediction column
+  eval_df <- df %>% 
+    mutate(prediction = if_else(nationality == "Dutch", 
+                                predictions >= cutoffs["Dutch"],
+                                predictions >= cutoffs["Non_Dutch"]),
+           inv_prediction = if_else(nationality == "Dutch", 
+                                    inverted_predictions >= cutoffs["Non_Dutch"],
+                                    inverted_predictions >= cutoffs["Dutch"]),
+           different = prediction != inv_prediction)
+  
+  list(sum(eval_df$different)/pop_size, eval_df)
 }
 ```
 
@@ -52,32 +70,42 @@ fitted_model <- naive_Bayes() %>%
   fit(accepted ~ nationality + test_score + english_cert + extracurricular, df)
 df$predicted <- predict(fitted_model, df)
 disc <- df_disc(df) 
+cutoffs <- c(Dutch = 0.5, Non_Dutch = 0.5)
 print(disc)
+
 while(disc > 0.01) {
   positive_label_count <- sum(df$accepted == "TRUE")
   predicted_positive_label_count <- sum(df$predicted == "TRUE")
   
   if (predicted_positive_label_count < positive_label_count) {
-    fitted_model <- adjust_fit(fitted_model, "up")
+    cutoffs <- adjust_fit(cutoffs, "up")
   } else {
-    fitted_model <- adjust_fit(fitted_model, "down") 
-  }
-  df$predicted <- predict(fitted_model, df)
-  new_disc <- df_disc(df) 
-  print(disc)
-  if (new_disc == disc) {
-    print("no improvement")
-    break
-  } else {
-    disc <- new_disc
+    cutoffs <- adjust_fit(cutoffs, "down") 
   }
   
+  predictions <- predict(fitted_model, df, type="prob")[[".pred_TRUE"]]
+  
+  df <- df %>%
+    mutate(predicted = as.factor(if_else(nationality == "Dutch", 
+                                        predictions >= cutoffs["Dutch"],
+                                        predictions >= cutoffs["Non_Dutch"])))
+  
+  new_disc <- df_disc(df) 
+  print(disc)
+  # if (new_disc == disc) {
+  #   print("no improvement")
+  #   break
+  # } else {
+  disc <- new_disc
+  # }
+  
 }
+print(cutoffs)
 print("Modified Naive Bayes")
 print("Group fairness")
 print(group_fairness(df, nationality, predicted)[[1]])
 print("Causal Discrimination")
-causal_disc <- causal_discrimination(df, fitted_model)
+causal_disc <- nb_causal_discrimination(df, fitted_model, cutoffs)
 print(causal_disc[[1]])
 ```
 
