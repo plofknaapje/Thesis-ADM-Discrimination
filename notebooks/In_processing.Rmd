@@ -25,7 +25,7 @@ df <- read_rds("../data/selection.rds") %>%
 df_disc <- function(df){
   fairness <- group_fairness(df, nationality, predicted)[[1]] %>%
     filter(predicted == "TRUE") %>%
-    select(proportion) 
+    select(perc) 
   max_val <- max(fairness)
   min_val <- min(fairness)
   max_val - min_val
@@ -73,7 +73,7 @@ disc <- df_disc(df)
 cutoffs <- c(Dutch = 0.5, Non_Dutch = 0.5)
 print(disc)
 
-while(disc > 0.01) {
+while(disc > 1) {
   positive_label_count <- sum(df$accepted == "TRUE")
   predicted_positive_label_count <- sum(df$predicted == "TRUE")
   
@@ -110,3 +110,4 @@ print(causal_disc[[1]])
 ```
 
 # Fairness classification
+See the python folder in scripts

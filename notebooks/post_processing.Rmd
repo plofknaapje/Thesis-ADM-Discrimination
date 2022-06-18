@@ -32,8 +32,8 @@ adjust_fit <- function(cutoffs, direction){
 df_disc <- function(df){
   summary_true <- group_fairness(df, nationality, predicted)[[1]] %>%
     filter(predicted == "TRUE")
-  max_val <- max(select(summary_true, proportion))
-  min_val <- min(select(summary_true, proportion))
+  max_val <- max(select(summary_true, perc))
+  min_val <- min(select(summary_true, perc))
   
   list(disc = max_val - min_val, n = sum(select(summary_true, total)))
 }
@@ -101,7 +101,7 @@ plot(filter(predictions_df, nationality == "Non_Dutch") %>% select(predicted))
 result <- df_disc(predictions_df)
 
 i <- 0
-while (result$disc > 0.02) {
+while (result$disc > 2) {
   
   if (result$n < original_n) {
     cutoffs <- adjust_fit(cutoffs, "up")

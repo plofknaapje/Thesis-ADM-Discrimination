@@ -11,7 +11,7 @@ group_fairness <- function(df, sensitive, outcome, fitted_model=NULL) {
       group_by({{sensitive}}, {{outcome}}) %>%
       summarise(total = n()) %>%
       group_by({{sensitive}}) %>%
-      mutate(proportion = total/sum(total)) %>%
+      mutate(perc = total/sum(total)*100) %>%
       ungroup()
     list(summary, df)
   } else {
@@ -20,7 +20,7 @@ group_fairness <- function(df, sensitive, outcome, fitted_model=NULL) {
       group_by({{sensitive}}, {{outcome}}) %>%
       summarise(total = n()) %>%
       group_by({{sensitive}}) %>%
-      mutate(proportion = total/sum(total)) %>%
+      mutate(perc = total/sum(total)*100) %>%
       ungroup()
     list(summary, df)
   }
