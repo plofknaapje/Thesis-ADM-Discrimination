@@ -2,6 +2,7 @@
 library(tidyverse)
 library(tidymodels)
 set.seed(666)
+options(dplyr.summarise.inform = FALSE)
 
 # == Functions =============================================
 group_fairness <- function(df, sensitive, outcome, fitted_model=NULL) {
@@ -87,18 +88,11 @@ all_metrics <- function(df, model, original_df=NULL) {
       mutate(accepted = as.factor(accepted))
     
     eval_df <- original_df %>%
-      mutate(predicted_accepted = predict(unaware_model, processed_original_df)[[".pred_class"]],
-             different = accepted != predicted_accepted)
+      mutate(predicted_accepted = predict(unaware_model, processed_original_df)[[".pred_class"]])
   } else {
     eval_df <- unaware_df %>%
-      mutate(predicted_accepted = predict(unaware_model, unaware_df)[[".pred_class"]],
-             different = accepted != predicted_accepted)
+      mutate(predicted_accepted = predict(unaware_model, unaware_df)[[".pred_class"]])
   }
-
-  
-  total_accepted = sum(eval_df$predicted_accepted == "TRUE")
-  ### Affected group (test_score in [7.7, 8.4])
-  different <- filter(eval_df, different)
   
   results[[3]] <- group_fairness(eval_df, nationality, predicted_accepted)
   names(results) <- c("group_fairness", "causal_discrimination", "unawareness")

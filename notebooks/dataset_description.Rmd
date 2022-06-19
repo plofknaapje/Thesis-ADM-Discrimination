@@ -17,21 +17,26 @@ source("../scripts/metrics_on_dataset.R")
 # The Dataset
 ```{r}
 df <- read_rds("../data/selection.rds")
+df_test <- read_rds("../data/selection_test.rds")
 head(df, 10)
 ```
 
 ## Characteristics
+### Training dataset
 ```{r}
 summary(df)
 summary(filter(df, accepted))
 summary(filter(df, !accepted))
 ```
-
+### Test dataset
+```{r}
+summary(df_test)
+```
 
 # Metrics on the Dataset
 ```{r}
 model <- decision_tree(mode = "classification")
-results <- all_metrics(df, model)
+results <- all_metrics(df, model, df_test)
 print_all_metrics("Unmodified dataset", results)
 ```
 

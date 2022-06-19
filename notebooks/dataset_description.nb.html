@@ -223,13 +223,68 @@ pre code {
 <h1>Imports</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShmYWlybW9kZWxzKVxubGlicmFyeSh0aWR5bW9kZWxzKVxubGlicmFyeShycGFydClcbmxpYnJhcnkoZGlzY3JpbSlcbnNvdXJjZShcIi4uL3NjcmlwdHMvbWV0cmljc19vbl9kYXRhc2V0LlJcIilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShmYWlybW9kZWxzKVxubGlicmFyeSh0aWR5bW9kZWxzKVxuYGBgIn0= -->
 <pre class="r"><code>library(fairmodels)
-library(tidymodels)
-library(rpart)
-library(discrim)
-source(&quot;../scripts/metrics_on_dataset.R&quot;)</code></pre>
+library(tidymodels)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeW1vZGVscyAwLjIuMCDilIDilIBcbuKclCBicm9vbSAgICAgICAgMC44LjAgICAgIOKclCByZWNpcGVzICAgICAgMC4yLjBcbuKclCBkaWFscyAgICAgICAgMC4xLjEgICAgIOKclCByc2FtcGxlICAgICAgMC4xLjFcbuKclCBkcGx5ciAgICAgICAgMS4wLjkgICAgIOKclCB0aWJibGUgICAgICAgMy4xLjdcbuKclCBnZ3Bsb3QyICAgICAgMy4zLjYgICAgIOKclCB0aWR5ciAgICAgICAgMS4yLjBcbuKclCBpbmZlciAgICAgICAgMS4wLjAgICAgIOKclCB0dW5lICAgICAgICAgMC4yLjBcbuKclCBtb2RlbGRhdGEgICAgMC4xLjEgICAgIOKclCB3b3JrZmxvd3MgICAgMC4yLjZcbuKclCBwYXJzbmlwICAgICAgMC4yLjEgICAgIOKclCB3b3JrZmxvd3NldHMgMC4yLjFcbuKclCBwdXJyciAgICAgICAgMC4zLjQgICAgIOKclCB5YXJkc3RpY2sgICAgMC4wLjlcbuKUgOKUgCBDb25mbGljdHMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAIHRpZHltb2RlbHNfY29uZmxpY3RzKCkg4pSA4pSAXG7inJYgcHVycnI6OmRpc2NhcmQoKSBtYXNrcyBzY2FsZXM6OmRpc2NhcmQoKVxu4pyWIGRwbHlyOjpmaWx0ZXIoKSAgbWFza3Mgc3RhdHM6OmZpbHRlcigpXG7inJYgZHBseXI6OmxhZygpICAgICBtYXNrcyBzdGF0czo6bGFnKClcbuKcliByZWNpcGVzOjpzdGVwKCkgIG1hc2tzIHN0YXRzOjpzdGVwKClcbuKAoiBEaWcgZGVlcGVyIGludG8gdGlkeSBtb2RlbGluZyB3aXRoIFIgYXQgaHR0cHM6Ly93d3cudG13ci5vcmdcbiJ9 -->
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidymodels 0.2.0 ──
+✔ broom        0.8.0     ✔ recipes      0.2.0
+✔ dials        0.1.1     ✔ rsample      0.1.1
+✔ dplyr        1.0.9     ✔ tibble       3.1.7
+✔ ggplot2      3.3.6     ✔ tidyr        1.2.0
+✔ infer        1.0.0     ✔ tune         0.2.0
+✔ modeldata    0.1.1     ✔ workflows    0.2.6
+✔ parsnip      0.2.1     ✔ workflowsets 0.2.1
+✔ purrr        0.3.4     ✔ yardstick    0.0.9
+── Conflicts ──────────────────────────────────────────────────────────────── tidymodels_conflicts() ──
+✖ purrr::discard() masks scales::discard()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ recipes::step()  masks stats::step()
+• Dig deeper into tidy modeling with R at https://www.tmwr.org</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShycGFydClcbmBgYCJ9 -->
+<pre class="r"><code>library(rpart)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYcnBhcnTigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpkaWFsc+KAmTpcblxuICAgIHBydW5lXG4ifQ== -->
+<pre><code>
+Attaching package: ‘rpart’
+
+The following object is masked from ‘package:dials’:
+
+    prune</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkaXNjcmltKVxuYGBgIn0= -->
+<pre class="r"><code>library(discrim)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZGlzY3JpbeKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmRpYWxz4oCZOlxuXG4gICAgc21vb3RobmVzc1xuIn0= -->
+<pre><code>
+Attaching package: ‘discrim’
+
+The following object is masked from ‘package:dials’:
+
+    smoothness</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiLi4vc2NyaXB0cy9tZXRyaWNzX29uX2RhdGFzZXQuUlwiKVxuYGBgIn0= -->
+<pre class="r"><code>source(&quot;../scripts/metrics_on_dataset.R&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4xIOKUgOKUgFxu4pyUIHJlYWRyICAgMi4xLjIgICAgIOKclCBmb3JjYXRzIDAuNS4xXG7inJQgc3RyaW5nciAxLjQuMCAgICAgXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG7inJYgcmVhZHI6OmNvbF9mYWN0b3IoKSBtYXNrcyBzY2FsZXM6OmNvbF9mYWN0b3IoKVxu4pyWIHB1cnJyOjpkaXNjYXJkKCkgICAgbWFza3Mgc2NhbGVzOjpkaXNjYXJkKClcbuKcliBkcGx5cjo6ZmlsdGVyKCkgICAgIG1hc2tzIHN0YXRzOjpmaWx0ZXIoKVxu4pyWIHN0cmluZ3I6OmZpeGVkKCkgICAgbWFza3MgcmVjaXBlczo6Zml4ZWQoKVxu4pyWIGRwbHlyOjpsYWcoKSAgICAgICAgbWFza3Mgc3RhdHM6OmxhZygpXG7inJYgcmVhZHI6OnNwZWMoKSAgICAgICBtYXNrcyB5YXJkc3RpY2s6OnNwZWMoKVxuIn0= -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
+✔ readr   2.1.2     ✔ forcats 0.5.1
+✔ stringr 1.4.0     
+── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ readr::col_factor() masks scales::col_factor()
+✖ purrr::discard()    masks scales::discard()
+✖ dplyr::filter()     masks stats::filter()
+✖ stringr::fixed()    masks recipes::fixed()
+✖ dplyr::lag()        masks stats::lag()
+✖ readr::spec()       masks yardstick::spec()</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -241,7 +296,7 @@ source(&quot;../scripts/metrics_on_dataset.R&quot;)</code></pre>
 <pre class="r"><code>df &lt;- read_rds(&quot;../data/selection.rds&quot;)
 head(df, 10)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MTAsIm5jb2wiOjcsInN1bW1hcnkiOnsiRGVzY3JpcHRpb24iOlsiZGYgWzEwIMOXIDddIl19fSwicmRmIjoiSDRzSUFBQUFBQUFBQTQxVDNVN0NNQlR1eHNaa0NwaGdOQnBpNGdPd0M3bnhjaGVFTzcwd21uQkhhbGRnc1hTazZ4VHZmQTE4Sm4wbHNOMWFzaldUZUpMbW5PLzg5VHY5ZVJ4Tmh2N0VCd0EwZ0dOWm9PRUtFN2pQVCtQQkhRQ09MWUFGSE5DU2VpMlNlc0x3aEc0TExhdnMwckxVcXNHVlJrMkMzekJKaFhXYVJ3dXZPOG80V2lqUWVram90SEJVYTExRVlLcEw5dzFuRVBHRUNXdGJvbVlaeTY2aHE2alpPNE5NYzR5WGtHQ0ZuSHRwNTVtTjNhRzlRVWZ1SFY1OVMva0pielpTdnNLeldTNWhiNWhMZUtuOGZlMVhXTWQxL25XaDFUeHlBY1c3TENZR3BYenJqN2haZjVqM3VkSjlGVGQ1Ni9oRmpqZi81RjBqMWF1bWNJbjFWWHZLZVV3aGp4TUtTY3cvOUEzTU1ZMHdVOGpuT09YVEZDVk0zOTRKcG5NU3A0c3B3b3dyWHhldk9ZTW9ZeXhHR1lHNnVNbEVkenBYNkFnaWhGY2NSd2F4Rmt2ZUEwMU92amI3YzMvcXRXL0VqeUNId1l5SkVwQy9rMG83TDFuSmtVUXpXLzR1MXlpMm1PSG9abFJ1SGczUUlxT3ZnMXZqcXR0Syt5WGJLN1owTkRGWHp5dU9KcWI2b0Z3Q1h6QlJvQ09HekdjTVZpeW0rdHg4NFUwRG5uQ284M3lVRU8wcC9zRDJGd3NwN2I1VUJBQUEifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MTAsIm5jb2wiOjcsInN1bW1hcnkiOnsiRGVzY3JpcHRpb24iOlsiZGYgWzEwIMOXIDddIl19fSwicmRmIjoiSDRzSUFBQUFBQUFBQTQxVDNVN0NNQlR1eGdZeVJVd3dHZzB4OFFIWURUZGU3b0p3cHhkR0UrNUk3UW9zbHBaMG5lS2RyNEhQcEs4RXRsdEx0bVlTVDlLYzg1Mi9mcWMvajZQSk1KZ0VBSUFHOEJ3SE5IeHBBdi81YVR5NEE4QnpKWENBQjlwS3IyVlNUeG90cVR0U3F5cTN0Qnk5YW5DbFVaUGdOMHhTYVozbDBjTHJqektCRmhxMEh4aWRGbzVxclk4SVRFM3B2dUVNSXNHNHRMWWxhbzYxM0JxNm1wcTdzOGcweDNnSkNkYkl1MWQybnRuWUhkb2JuS3E5byt0dkpUL1I3VWJKVjNRK3l5WHFEWE9KcnJTL2Ivd2FtN2pKdnltMG5rY3RvSG1YeGNhZ2xPLzhFYmZyRC9PKzBMcXY0elp2RTcvTThlYWZ2R3VrZXRVVUxyRzU2cFoySGxNb0VrWWhTY1NIdVlFNXBqSG1HZ1VDcDJLYUlzYk43WjFnT2lkSnVwZ2l6SVgyZGZGYWNJZ3l6aE9VRVdpS20xeDJwM09OamlCQ2VDVndiQkZyYy9ZZUduTHF0Ym1mKzFPdmZTTkJEQVVNWjF5V2dQeWRWTnExMkVxTkpKdTU2bmY1VnJIRExVYzNvMnJ6ZUlBV0dYMGRESzJyN21nZGxPeFdzYVZuaVBsbVhuazBDVFVINVJQNGdva0dwM0xJZk1ad3hSTnF6aTJRM2pRVVRFQ1RGeUJHaktmNEE5dGZLUXV6M1ZRRUFBQT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["nationality"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["gender"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["test_score"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["english_cert"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["extracurricular"],"name":[5],"type":["lgl"],"align":["right"]},{"label":["rating"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["accepted"],"name":[7],"type":["lgl"],"align":["right"]}],"data":[{"1":"Non_Dutch","2":"Female","3":"6.7","4":"FALSE","5":"TRUE","6":"6.7","7":"FALSE","_rn_":"1"},{"1":"Non_Dutch","2":"Female","3":"8.8","4":"TRUE","5":"TRUE","6":"8.8","7":"TRUE","_rn_":"2"},{"1":"Non_Dutch","2":"Female","3":"5.1","4":"FALSE","5":"FALSE","6":"5.1","7":"FALSE","_rn_":"3"},{"1":"Dutch","2":"Female","3":"4.8","4":"FALSE","5":"FALSE","6":"5.6","7":"FALSE","_rn_":"4"},{"1":"Dutch","2":"Male","3":"6.4","4":"FALSE","5":"FALSE","6":"7.2","7":"FALSE","_rn_":"5"},{"1":"Non_Dutch","2":"Male","3":"7.1","4":"TRUE","5":"FALSE","6":"7.1","7":"FALSE","_rn_":"6"},{"1":"Non_Dutch","2":"Male","3":"4.9","4":"FALSE","5":"FALSE","6":"4.9","7":"FALSE","_rn_":"7"},{"1":"Dutch","2":"Male","3":"4.8","4":"FALSE","5":"FALSE","6":"5.6","7":"FALSE","_rn_":"8"},{"1":"Dutch","2":"Female","3":"5.1","4":"FALSE","5":"FALSE","6":"5.9","7":"FALSE","_rn_":"9"},{"1":"Non_Dutch","2":"Male","3":"7.6","4":"FALSE","5":"TRUE","6":"7.6","7":"FALSE","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10],"total":[7]},"rows":{"min":[10],"max":[10],"total":[10]},"pages":{}}}
@@ -252,67 +307,80 @@ head(df, 10)</code></pre>
 <!-- rnb-text-begin -->
 <div id="characteristics" class="section level2">
 <h2>Characteristics</h2>
+<div id="training-dataset" class="section level3">
+<h3>Training dataset</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZilcbmBgYCJ9 -->
 <pre class="r"><code>summary(df)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgICB0ZXN0X3Njb3JlICAgICBlbmdsaXNoX2NlcnQgICAgZXh0cmFjdXJyaWN1bGFyXG4gRHV0Y2ggICAgOjQ5NyAgIEZlbWFsZTo1MTQgICBNaW4uICAgOiAxLjgwMCAgIE1vZGUgOmxvZ2ljYWwgICBNb2RlIDpsb2dpY2FsICBcbiBOb25fRHV0Y2g6NTAzICAgTWFsZSAgOjQ4NiAgIDFzdCBRdS46IDUuNDc1ICAgRkFMU0U6NjY2ICAgICAgIEZBTFNFOjYwMCAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVkaWFuIDogNi41MDAgICBUUlVFIDozMzQgICAgICAgVFJVRSA6NDAwICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZWFuICAgOiA2LjUxMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDNyZCBRdS46IDcuNTI1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDoxMC4wMDAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgIHJhdGluZyAgICAgICAgYWNjZXB0ZWQgICAgICBcbiBNaW4uICAgOiAyLjQwMCAgIE1vZGUgOmxvZ2ljYWwgIFxuIDFzdCBRdS46IDUuOTAwICAgRkFMU0U6ODM3ICAgICAgXG4gTWVkaWFuIDogNi45NTAgICBUUlVFIDoxNjMgICAgICBcbiBNZWFuICAgOiA2LjkwMyAgICAgICAgICAgICAgICAgIFxuIDNyZCBRdS46IDcuOTAwICAgICAgICAgICAgICAgICAgXG4gTWF4LiAgIDoxMC4wMDAgICAgICAgICAgICAgICAgICBcbiJ9 -->
-<pre><code>    nationality     gender      test_score     english_cert    extracurricular
- Dutch    :497   Female:514   Min.   : 1.800   Mode :logical   Mode :logical  
- Non_Dutch:503   Male  :486   1st Qu.: 5.475   FALSE:666       FALSE:600      
-                              Median : 6.500   TRUE :334       TRUE :400      
-                              Mean   : 6.511                                  
-                              3rd Qu.: 7.525                                  
-                              Max.   :10.000                                  
-     rating        accepted      
- Min.   : 2.400   Mode :logical  
- 1st Qu.: 5.900   FALSE:837      
- Median : 6.950   TRUE :163      
- Mean   : 6.903                  
- 3rd Qu.: 7.900                  
- Max.   :10.000                  </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgICB0ZXN0X3Njb3JlICAgICBlbmdsaXNoX2NlcnQgICAgZXh0cmFjdXJyaWN1bGFyICAgICByYXRpbmcgICAgICBcbiBEdXRjaCAgICA6NDk3ICAgRmVtYWxlOjUxNCAgIE1pbi4gICA6IDEuODAwICAgTW9kZSA6bG9naWNhbCAgIE1vZGUgOmxvZ2ljYWwgICBNaW4uICAgOiAyLjQwMCAgXG4gTm9uX0R1dGNoOjUwMyAgIE1hbGUgIDo0ODYgICAxc3QgUXUuOiA1LjQ3NSAgIEZBTFNFOjY2NiAgICAgICBGQUxTRTo2MDAgICAgICAgMXN0IFF1LjogNS45MDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVkaWFuIDogNi41MDAgICBUUlVFIDozMzQgICAgICAgVFJVRSA6NDAwICAgICAgIE1lZGlhbiA6IDYuOTUwICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1lYW4gICA6IDYuNTExICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZWFuICAgOiA2LjkwMyAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOiA3LjUyNSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjogNy45MDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDoxMC4wMDAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1heC4gICA6MTAuMDAwICBcbiAgYWNjZXB0ZWQgICAgICBcbiBNb2RlIDpsb2dpY2FsICBcbiBGQUxTRTo4MzcgICAgICBcbiBUUlVFIDoxNjMgICAgICBcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>    nationality     gender      test_score     english_cert    extracurricular     rating      
+ Dutch    :497   Female:514   Min.   : 1.800   Mode :logical   Mode :logical   Min.   : 2.400  
+ Non_Dutch:503   Male  :486   1st Qu.: 5.475   FALSE:666       FALSE:600       1st Qu.: 5.900  
+                              Median : 6.500   TRUE :334       TRUE :400       Median : 6.950  
+                              Mean   : 6.511                                   Mean   : 6.903  
+                              3rd Qu.: 7.525                                   3rd Qu.: 7.900  
+                              Max.   :10.000                                   Max.   :10.000  
+  accepted      
+ Mode :logical  
+ FALSE:837      
+ TRUE :163      
+                
+                
+                </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShmaWx0ZXIoZGYsIGFjY2VwdGVkKSlcbmBgYCJ9 -->
 <pre class="r"><code>summary(filter(df, accepted))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgIHRlc3Rfc2NvcmUgICAgIGVuZ2xpc2hfY2VydCAgICBleHRyYWN1cnJpY3VsYXJcbiBEdXRjaCAgICA6MTA3ICAgRmVtYWxlOjc3ICAgTWluLiAgIDogNy43MDAgICBNb2RlIDpsb2dpY2FsICAgTW9kZSA6bG9naWNhbCAgXG4gTm9uX0R1dGNoOiA1NiAgIE1hbGUgIDo4NiAgIDFzdCBRdS46IDguMjAwICAgRkFMU0U6MTE3ICAgICAgIEZBTFNFOjEwMiAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZWRpYW4gOiA4LjYwMCAgIFRSVUUgOjQ2ICAgICAgICBUUlVFIDo2MSAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDogOC42ODQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIDNyZCBRdS46IDkuMDUwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNYXguICAgOjEwLjAwMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgcmF0aW5nICAgICAgIGFjY2VwdGVkICAgICAgXG4gTWluLiAgIDogOC41MDAgICBNb2RlOmxvZ2ljYWwgIFxuIDFzdCBRdS46IDguODAwICAgVFJVRToxNjMgICAgICBcbiBNZWRpYW4gOiA5LjEwMCAgICAgICAgICAgICAgICAgXG4gTWVhbiAgIDogOS4xNzUgICAgICAgICAgICAgICAgIFxuIDNyZCBRdS46IDkuNjAwICAgICAgICAgICAgICAgICBcbiBNYXguICAgOjEwLjAwMCAgICAgICAgICAgICAgICAgXG4ifQ== -->
-<pre><code>    nationality     gender     test_score     english_cert    extracurricular
- Dutch    :107   Female:77   Min.   : 7.700   Mode :logical   Mode :logical  
- Non_Dutch: 56   Male  :86   1st Qu.: 8.200   FALSE:117       FALSE:102      
-                             Median : 8.600   TRUE :46        TRUE :61       
-                             Mean   : 8.684                                  
-                             3rd Qu.: 9.050                                  
-                             Max.   :10.000                                  
-     rating       accepted      
- Min.   : 8.500   Mode:logical  
- 1st Qu.: 8.800   TRUE:163      
- Median : 9.100                 
- Mean   : 9.175                 
- 3rd Qu.: 9.600                 
- Max.   :10.000                 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgIHRlc3Rfc2NvcmUgICAgIGVuZ2xpc2hfY2VydCAgICBleHRyYWN1cnJpY3VsYXIgICAgIHJhdGluZyAgICAgIFxuIER1dGNoICAgIDoxMDcgICBGZW1hbGU6NzcgICBNaW4uICAgOiA3LjcwMCAgIE1vZGUgOmxvZ2ljYWwgICBNb2RlIDpsb2dpY2FsICAgTWluLiAgIDogOC41MDAgIFxuIE5vbl9EdXRjaDogNTYgICBNYWxlICA6ODYgICAxc3QgUXUuOiA4LjIwMCAgIEZBTFNFOjExNyAgICAgICBGQUxTRToxMDIgICAgICAgMXN0IFF1LjogOC44MDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZWRpYW4gOiA4LjYwMCAgIFRSVUUgOjQ2ICAgICAgICBUUlVFIDo2MSAgICAgICAgTWVkaWFuIDogOS4xMDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZWFuICAgOiA4LjY4NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDogOS4xNzUgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOiA5LjA1MCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjogOS42MDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNYXguICAgOjEwLjAwMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDoxMC4wMDAgIFxuIGFjY2VwdGVkICAgICAgXG4gTW9kZTpsb2dpY2FsICBcbiBUUlVFOjE2MyAgICAgIFxuICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code>    nationality     gender     test_score     english_cert    extracurricular     rating      
+ Dutch    :107   Female:77   Min.   : 7.700   Mode :logical   Mode :logical   Min.   : 8.500  
+ Non_Dutch: 56   Male  :86   1st Qu.: 8.200   FALSE:117       FALSE:102       1st Qu.: 8.800  
+                             Median : 8.600   TRUE :46        TRUE :61        Median : 9.100  
+                             Mean   : 8.684                                   Mean   : 9.175  
+                             3rd Qu.: 9.050                                   3rd Qu.: 9.600  
+                             Max.   :10.000                                   Max.   :10.000  
+ accepted      
+ Mode:logical  
+ TRUE:163      
+               
+               
+               
+               </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShmaWx0ZXIoZGYsICFhY2NlcHRlZCkpXG5gYGAifQ== -->
 <pre class="r"><code>summary(filter(df, !accepted))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgICB0ZXN0X3Njb3JlICAgIGVuZ2xpc2hfY2VydCAgICBleHRyYWN1cnJpY3VsYXJcbiBEdXRjaCAgICA6MzkwICAgRmVtYWxlOjQzNyAgIE1pbi4gICA6MS44MDAgICBNb2RlIDpsb2dpY2FsICAgTW9kZSA6bG9naWNhbCAgXG4gTm9uX0R1dGNoOjQ0NyAgIE1hbGUgIDo0MDAgICAxc3QgUXUuOjUuMjAwICAgRkFMU0U6NTQ5ICAgICAgIEZBTFNFOjQ5OCAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVkaWFuIDo2LjIwMCAgIFRSVUUgOjI4OCAgICAgICBUUlVFIDozMzkgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1lYW4gICA6Ni4wODggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOjcuMDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDo4LjQwMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgcmF0aW5nICAgICAgYWNjZXB0ZWQgICAgICBcbiBNaW4uICAgOjIuNDAgICBNb2RlIDpsb2dpY2FsICBcbiAxc3QgUXUuOjUuNjAgICBGQUxTRTo4MzcgICAgICBcbiBNZWRpYW4gOjYuNjAgICAgICAgICAgICAgICAgICBcbiBNZWFuICAgOjYuNDYgICAgICAgICAgICAgICAgICBcbiAzcmQgUXUuOjcuNDAgICAgICAgICAgICAgICAgICBcbiBNYXguICAgOjguNDAgICAgICAgICAgICAgICAgICBcbiJ9 -->
-<pre><code>    nationality     gender      test_score    english_cert    extracurricular
- Dutch    :390   Female:437   Min.   :1.800   Mode :logical   Mode :logical  
- Non_Dutch:447   Male  :400   1st Qu.:5.200   FALSE:549       FALSE:498      
-                              Median :6.200   TRUE :288       TRUE :339      
-                              Mean   :6.088                                  
-                              3rd Qu.:7.000                                  
-                              Max.   :8.400                                  
-     rating      accepted      
- Min.   :2.40   Mode :logical  
- 1st Qu.:5.60   FALSE:837      
- Median :6.60                  
- Mean   :6.46                  
- 3rd Qu.:7.40                  
- Max.   :8.40                  </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIG5hdGlvbmFsaXR5ICAgICBnZW5kZXIgICAgICB0ZXN0X3Njb3JlICAgIGVuZ2xpc2hfY2VydCAgICBleHRyYWN1cnJpY3VsYXIgICAgIHJhdGluZyAgICBcbiBEdXRjaCAgICA6MzkwICAgRmVtYWxlOjQzNyAgIE1pbi4gICA6MS44MDAgICBNb2RlIDpsb2dpY2FsICAgTW9kZSA6bG9naWNhbCAgIE1pbi4gICA6Mi40MCAgXG4gTm9uX0R1dGNoOjQ0NyAgIE1hbGUgIDo0MDAgICAxc3QgUXUuOjUuMjAwICAgRkFMU0U6NTQ5ICAgICAgIEZBTFNFOjQ5OCAgICAgICAxc3QgUXUuOjUuNjAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWVkaWFuIDo2LjIwMCAgIFRSVUUgOjI4OCAgICAgICBUUlVFIDozMzkgICAgICAgTWVkaWFuIDo2LjYwICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1lYW4gICA6Ni4wODggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1lYW4gICA6Ni40NiAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOjcuMDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOjcuNDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDo4LjQwMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDo4LjQwICBcbiAgYWNjZXB0ZWQgICAgICBcbiBNb2RlIDpsb2dpY2FsICBcbiBGQUxTRTo4MzcgICAgICBcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>    nationality     gender      test_score    english_cert    extracurricular     rating    
+ Dutch    :390   Female:437   Min.   :1.800   Mode :logical   Mode :logical   Min.   :2.40  
+ Non_Dutch:447   Male  :400   1st Qu.:5.200   FALSE:549       FALSE:498       1st Qu.:5.60  
+                              Median :6.200   TRUE :288       TRUE :339       Median :6.60  
+                              Mean   :6.088                                   Mean   :6.46  
+                              3rd Qu.:7.000                                   3rd Qu.:7.40  
+                              Max.   :8.400                                   Max.   :8.40  
+  accepted      
+ Mode :logical  
+ FALSE:837      
+                
+                
+                
+                </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="test-dataset" class="section level3">
+<h3>Test dataset</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZl90ZXN0KVxuYGBgIn0= -->
+<pre class="r"><code>summary(df_test)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
 </div>
 </div>
 <div id="metrics-on-the-dataset" class="section level1">
@@ -323,11 +391,9 @@ head(df, 10)</code></pre>
 <pre class="r"><code>model &lt;- decision_tree(mode = &quot;classification&quot;)
 results &lt;- all_metrics(df, model)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ25hdGlvbmFsaXR5Jy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGVcbmAuZ3JvdXBzYCBhcmd1bWVudC5cbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICduYXRpb25hbGl0eScuIFlvdSBjYW4gb3ZlcnJpZGUgdXNpbmcgdGhlXG5gLmdyb3Vwc2AgYXJndW1lbnQuXG4ifQ== -->
-<pre><code>`summarise()` has grouped output by &#39;nationality&#39;. You can override using the
-`.groups` argument.
-`summarise()` has grouped output by &#39;nationality&#39;. You can override using the
-`.groups` argument.</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ25hdGlvbmFsaXR5Jy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ25hdGlvbmFsaXR5Jy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;nationality&#39;. You can override using the `.groups` argument.
+`summarise()` has grouped output by &#39;nationality&#39;. You can override using the `.groups` argument.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnRfYWxsX21ldHJpY3MoXCJVbm1vZGlmaWVkIGRhdGFzZXRcIiwgcmVzdWx0cylcbmBgYCJ9 -->
 <pre class="r"><code>print_all_metrics(&quot;Unmodified dataset&quot;, results)</code></pre>
@@ -336,10 +402,10 @@ results &lt;- all_metrics(df, model)</code></pre>
 <pre><code>[1] &quot;Unmodified dataset&quot;
 [1] &quot;Group fairness&quot;</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI0IMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSdjBzRE1SVE8vVko3MGlvNEZWeEZseDZDRG02SFVCd2RwRUxSUVdLYTJxTXhPZEpVN2RiSlVmOFR3Y0ZORUdkWE4vOEN3VlZjcE9kTGt3aDNRL0s5Zk1uMzN2ZGVqdHJkbmJnYkk0UUNGSG9lQ2lJSVVYVGNPV2p0SVJUNmNQQlFpR29hYitEUkdnUWhZTjBnWEpybG0xVVNMREI2UmRrSW90WDVyV0dqOWxpUmdUM1VEZ1UvTTBSWkd4R0dSMDc2bjdDUGlSSVNvaG1zMkZwQTFvSkRhODI3QlJ3Q3ZnQkNMNmloK2ZSenZUTzVmM3BQMys0ZW1xOWJqK21YK1BrNGJYNm56OVA5amMzdGs2b05qaStwc3hGYWNwbGpsUW1PV2FZbWxsckNoTkJjMFo3VEthRXdzNGM0bHlJWFVtc3E2V3RTWENldWhQYnRUMkVyaXVMWFBBeUt5Z1RpSGxZNDZVdVFtQ21VMGkyS1hCZUJaTDcrcDZnaTltU0ZXQmx6WGJ6WElvTXhIN1oyN1ZEZE1PczJEc3V4TGhrNlk1SDdHc292TWs1ZCt3eWZVOWQrQTVxYzk1amtNdVBLZFFMc0tDbU5pUWptR1BQRHN6OTU5bE1hbmdJQUFBPT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI0IMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFSUFUvRE1CQjFVcWVRb0JZa2RpUVdKcG9CVk1HWW9Tb2JBMS9xVmhuSHBWR05IYVV1dEJzVC9BcFkrQ0ZzRFB3UHhGOWdRQTNuMmtZa2cvM096Nzd6ZTNkbnZjRmhOSWdRUWcyRVBRODFBZ2hSY0huUjd4d2poSDA0ZUFpalVPTWNIbTFEZ0FGYkJ1SFNMTitzU2tLVHN6dkdweEJ0clc0TkcvUm1pbzd0SVR5VlltaUlhbTVBT1ptNjFMK0NJMEtWTENCYXdvcXNCR1FsT0xUU3ZFZkFDZUFiSUhoQmJjMG41eSs3eSs5K08rayt6ZkhPMTBkeWRiUjRIZTZmSkh1OWc4L204M3RkaGlDM3pNbkFsdHdRUkdWU0VKNnBoYVhXQ2FVc1Z5eDFlVW9xd3UwQjU2eWd0Y0poSWU5alYxd3I5aDlnSzh2eXh6eHNsRFh2VVVvVWlVY0ZwQmovbFhKck10ZVNvSml2SnhUVWtyMmlSbXpPaFA0ODdkRHhURXc2WGR0TzE4YVdqWEUxMWw5aUp5eHdRMkhpSmhQTUdlZmttam5qYlRDNThoam5SU2FVY3dMc05QN2ZvSWhLN2hnejIrVXYvR25OWkpnQ0FBQT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["nationality"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["accepted"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["total"],"name":[3],"type":["int"],"align":["right"]},{"label":["proportion"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dutch","2":"FALSE","3":"390","4":"0.7847082"},{"1":"Dutch","2":"TRUE","3":"107","4":"0.2152918"},{"1":"Non_Dutch","2":"FALSE","3":"447","4":"0.8886680"},{"1":"Non_Dutch","2":"TRUE","3":"56","4":"0.1113320"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+{"columns":[{"label":["nationality"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["accepted"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["total"],"name":[3],"type":["int"],"align":["right"]},{"label":["perc"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dutch","2":"FALSE","3":"390","4":"78.47082"},{"1":"Dutch","2":"TRUE","3":"107","4":"21.52918"},{"1":"Non_Dutch","2":"FALSE","3":"447","4":"88.86680"},{"1":"Non_Dutch","2":"TRUE","3":"56","4":"11.13320"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -348,10 +414,10 @@ results &lt;- all_metrics(df, model)</code></pre>
 [1] 0.123
 [1] &quot;Unawareness&quot;</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI0IMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMzFSdlU3RE1CQjIwZ1RVb0JaVUhvQW5hQmNZR0pDaVNtMG5ZQ2l0MUswWXg2VVJ3WTVTbHgrSm9RTURNeS9Cd3NZVHNDSFlZV05nUTBqd0FxamhYTnRBSXNIZ2ZIZWZmZmZkbDJzM2VxdGV6ME1JRlpCaldhamdRb2pjYnFkVlhVZklzU0d4a0lPS0VrL2cwVElFRG1CSklWeXFZNnVUS1ppTDZCR05SaEF0elc0VjZ6YkdnZ3gxVXR6bXJLK0liSzFMSWp3eXBkOE5CNWdJbmtBMHpZMWcvNkJzWTZkNTBWWjljNmVwRTZmVDdqYlZ3MEw2bndUU0V0WWxZQi93QnJBQnB5eDUvL1ZsNWVOODk5Ry9PNTdVMzgrdS9MZnJDM3BmMnZCdnQ1NkhUdytWdkNPR0Q2bHg1R2h5Z1dFUmNvYWpVSnhxcWhJbk5BaUpvRUVmRTBKakNFd0h3UVdPZE9MRkNZOTVJcXR6UXNXRUg5ZU1tSFJnVCtDVHB1bm5INTY5QUF0Y0d5UlFvbnhuMnMzeldJcEFNMXN1MzgwVlcwbU9XQnd6S1I1VXlYRE1EcXByVWtCdkIrbUJMTDI1WDdHVWRNeGdybGtHWmZzaG84WitoUGVvc1Y4R2t6T1B0VGdKbVRCT2dCM1ZNcitKOE1nd2FxZlRMMjlVbzdmekFnQUEifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI0IMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMzFSd1VyRFFCRGRwSW1TaUZYMExINkFKSmNpOUJpaDdha0kxaFo3RU1wMnM3V2hjUlBTcmRxYktKNEZQOENyZ2tmL3dwdFhmOE9yTk01MmQ3VU42R0h6WnQ3dXpKdVhhZFc2RmJmcklvUkt5RElNVkxJaFJIYW4zZkNxQ0ZrbUpBYXlrQ1B3Q2g1dFEyQUJya3VFUzNsTWVaWUtWbUo2UWVNeFJKdnpXOG5hdFFrblE1VTRod25yU1dLNTFpWXhIdXZTbjRZRFRIaVNRVFFyakdEK29taGo1a1hSeGtIenVLNFNxOTNxMU9YRFV2NmZCRklTeGdOZ0QvQVZzQWFuTFBpZ1hYMyszQjA5QlpXZDA4ck5VVC9vUEw3ZDMzMmNCSHZPeSsyNzF5dzZZdmljYWtlV0l0Y1k1bEhDY0J6eHFhSzIwb3lHRWVFMDdHRkNhQXFCN3NBVGptTnRJcVVaS1VnNFdYTHBheGt4dTNrTm56elB2LzV3NjRhWVkzK1FRWWwwdk5SdU5VbkZjTkRNRkd1M0M4VkdWaUEySmt5SWh4NFpUdGpJMnhjQ2FpOUlEV1NvblMzRVF0TFNnOWw2RFpTZFJZeHE0ekh1VTIyOERDYm5IdjAwaXhqWFRvQWQrNHMveUNWSnJCbTV6ZGszNCtqQWUrMENBQUE9In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["nationality"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["predicted_accepted"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["total"],"name":[3],"type":["int"],"align":["right"]},{"label":["proportion"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dutch","2":"FALSE","3":"402","4":"0.8088531"},{"1":"Dutch","2":"TRUE","3":"95","4":"0.1911469"},{"1":"Non_Dutch","2":"FALSE","3":"435","4":"0.8648111"},{"1":"Non_Dutch","2":"TRUE","3":"68","4":"0.1351889"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+{"columns":[{"label":["nationality"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["predicted_accepted"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["total"],"name":[3],"type":["int"],"align":["right"]},{"label":["perc"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Dutch","2":"FALSE","3":"402","4":"80.88531"},{"1":"Dutch","2":"TRUE","3":"95","4":"19.11469"},{"1":"Non_Dutch","2":"FALSE","3":"435","4":"86.48111"},{"1":"Non_Dutch","2":"TRUE","3":"68","4":"13.51889"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -360,7 +426,7 @@ results &lt;- all_metrics(df, model)</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0YXNldCBEZXNjcmlwdGlvbiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBJbXBvcnRzCmBgYHtyfQpsaWJyYXJ5KGZhaXJtb2RlbHMpCmxpYnJhcnkodGlkeW1vZGVscykKbGlicmFyeShycGFydCkKbGlicmFyeShkaXNjcmltKQpzb3VyY2UoIi4uL3NjcmlwdHMvbWV0cmljc19vbl9kYXRhc2V0LlIiKQpgYGAKCiMgVGhlIERhdGFzZXQKYGBge3J9CmRmIDwtIHJlYWRfcmRzKCIuLi9kYXRhL3NlbGVjdGlvbi5yZHMiKQpoZWFkKGRmLCAxMCkKYGBgCgojIyBDaGFyYWN0ZXJpc3RpY3MKYGBge3J9CnN1bW1hcnkoZGYpCnN1bW1hcnkoZmlsdGVyKGRmLCBhY2NlcHRlZCkpCnN1bW1hcnkoZmlsdGVyKGRmLCAhYWNjZXB0ZWQpKQpgYGAKCgojIE1ldHJpY3Mgb24gdGhlIERhdGFzZXQKYGBge3J9Cm1vZGVsIDwtIGRlY2lzaW9uX3RyZWUobW9kZSA9ICJjbGFzc2lmaWNhdGlvbiIpCnJlc3VsdHMgPC0gYWxsX21ldHJpY3MoZGYsIG1vZGVsKQpwcmludF9hbGxfbWV0cmljcygiVW5tb2RpZmllZCBkYXRhc2V0IiwgcmVzdWx0cykKYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0YXNldCBEZXNjcmlwdGlvbiIKb3V0cHV0OgogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKLS0tCgojIEltcG9ydHMKYGBge3J9CmxpYnJhcnkoZmFpcm1vZGVscykKbGlicmFyeSh0aWR5bW9kZWxzKQpsaWJyYXJ5KHJwYXJ0KQpsaWJyYXJ5KGRpc2NyaW0pCnNvdXJjZSgiLi4vc2NyaXB0cy9tZXRyaWNzX29uX2RhdGFzZXQuUiIpCmBgYAoKIyBUaGUgRGF0YXNldApgYGB7cn0KZGYgPC0gcmVhZF9yZHMoIi4uL2RhdGEvc2VsZWN0aW9uLnJkcyIpCmRmX3Rlc3QgPC0gcmVhZF9yZHMoIi4uL2RhdGEvc2VsZWN0aW9uX3Rlc3QucmRzIikKaGVhZChkZiwgMTApCmBgYAoKIyMgQ2hhcmFjdGVyaXN0aWNzCiMjIyBUcmFpbmluZyBkYXRhc2V0CmBgYHtyfQpzdW1tYXJ5KGRmKQpzdW1tYXJ5KGZpbHRlcihkZiwgYWNjZXB0ZWQpKQpzdW1tYXJ5KGZpbHRlcihkZiwgIWFjY2VwdGVkKSkKYGBgCiMjIyBUZXN0IGRhdGFzZXQKYGBge3J9CnN1bW1hcnkoZGZfdGVzdCkKYGBgCgojIE1ldHJpY3Mgb24gdGhlIERhdGFzZXQKYGBge3J9Cm1vZGVsIDwtIGRlY2lzaW9uX3RyZWUobW9kZSA9ICJjbGFzc2lmaWNhdGlvbiIpCnJlc3VsdHMgPC0gYWxsX21ldHJpY3MoZGYsIG1vZGVsLCBkZl90ZXN0KQpwcmludF9hbGxfbWV0cmljcygiVW5tb2RpZmllZCBkYXRhc2V0IiwgcmVzdWx0cykKYGBgCgoK</div>
 
 
 

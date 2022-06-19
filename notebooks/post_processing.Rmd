@@ -17,6 +17,9 @@ source("../scripts/metrics_on_dataset.R")
 df <- read_rds("../data/selection.rds") %>%
   select(-gender, -rating) %>%
   mutate(accepted = as.factor(accepted))
+df_test <- read_rds("../data/selection_test.rds") %>%
+  select(-gender, -rating) %>%
+  mutate(accepted = as.factor(accepted))
 ```
 
 # Naive Bayes ensamble
@@ -125,7 +128,8 @@ plot(filter(predictions_df, nationality == "Non_Dutch") %>% select(predicted))
 
 # Metrics
 ```{r}
-print(group_fairness(predictions_df, nationality, predicted)[[1]])
-print(causal_discrimination_joined_model(df, models, cutoffs)[[1]])
+predicted_test <- predictions(df_test, models, cutoffs)
+print(group_fairness(predicted_test, nationality, predicted)[[1]])
+print(causal_discrimination_joined_model(df_test, models, cutoffs)[[1]])
 ```
 

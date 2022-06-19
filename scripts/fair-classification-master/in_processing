@@ -79,16 +79,23 @@ def selective_pred_sum(predictions, x_control, nationality, outcome):
                for i in range(len(predictions)))
 
 
+def preprocessing_X(df, intercept=False):
+    X = df.loc[:, ["test_score", "english_cert", "extracurricular"]]
+    X["english_cert"] = X["english_cert"].astype(int)
+    X["extracurricular"] = X["extracurricular"].astype(int)
+    return add_intercept(X.to_numpy())
+
+
 if __name__ == '__main__':
 
     mapping_nat = {"Non_Dutch": "0", "Dutch": "1"}
     mapping_acc = {"True": "1", "False": "-1"}
     df = pd.read_csv("../../data/selection.csv")
+    df_test = pd.read_csv("../../data/selection_test.csv")
+
     y = np.array(df["accepted"].astype(str).replace(mapping_acc).astype(int))
-    X = df.loc[:, ["test_score", "english_cert", "extracurricular"]]
-    X["english_cert"] = X["english_cert"].astype(int)
-    X["extracurricular"] = X["extracurricular"].astype(int)
-    X = X.to_numpy()
+    X = preprocessing_X(df)
+    X_test = preprocessing_X(df_test)
     x_control = {"nationality": np.array(df["nationality"].replace(mapping_nat).astype(int))}
 
     print(X, type(X))
@@ -101,9 +108,8 @@ if __name__ == '__main__':
     data_package = {}
     names = ["x_train", "y_train", "x_control_train",
              "x_test", "y_test", "x_control_test"]
-    X = add_intercept(
-        X)  # add intercept to X before applying the linear classifier
-    train_fold_size = 0.7
+
+    train_fold_size = 0.
     data = split_into_train_test(X, y, x_control, train_fold_size)
     for i in range(6):
         data_package[names[i]] = data[i]
@@ -129,7 +135,7 @@ if __name__ == '__main__':
     )
 
     """ Group Fairness """
-    predictions = np.sign(np.dot(X, w_uncons).tolist())
+    predictions = np.sign(np.dot(X_test, w_uncons).tolist())
     outcomes = {
         "Dutch_Pos": selective_pred_sum(predictions, x_control, 1, 1),
         "Non_Dutch_Pos": selective_pred_sum(predictions, x_control, 0, 1),
@@ -158,7 +164,7 @@ if __name__ == '__main__':
     #                 acc_uncons, acc_f_cons, "img/f_cons.png")
 
     """ Group Fairness """
-    predictions = np.sign(np.dot(X, w_f_cons).tolist())
+    predictions = np.sign(np.dot(X_test, w_f_cons).tolist())
     outcomes = {
         "Dutch_Pos": selective_pred_sum(predictions, x_control, 1, 1),
         "Non_Dutch_Pos": selective_pred_sum(predictions, x_control, 0, 1),

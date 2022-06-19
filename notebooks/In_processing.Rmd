@@ -18,6 +18,9 @@ source("../scripts/metrics_on_dataset.R")
 df <- read_rds("../data/selection.rds") %>%
   mutate(accepted = as.factor(accepted)) %>%
   select(-rating, -gender)
+df_test <- read_rds("../data/selection_test.rds") %>%
+  mutate(accepted = as.factor(accepted)) %>%
+  select(-rating, -gender)
 ```
 
 # Modified Naive Bayes
@@ -103,11 +106,17 @@ while(disc > 1) {
   
 }
 print(cutoffs)
+df_test$predicted <- predict(fitted_model, df_test)
+df_test <- df_test %>%
+    mutate(predicted = as.factor(if_else(nationality == "Dutch", 
+                                        predictions >= cutoffs["Dutch"],
+                                        predictions >= cutoffs["Non_Dutch"])))
+
 print("Modified Naive Bayes")
 print("Group fairness")
-print(group_fairness(df, nationality, predicted)[[1]])
+print(group_fairness(df_test, nationality, predicted)[[1]])
 print("Causal Discrimination")
-causal_disc <- nb_causal_discrimination(df, fitted_model, cutoffs)
+causal_disc <- nb_causal_discrimination(df_test, fitted_model, cutoffs)
 print(causal_disc[[1]])
 ```
 
