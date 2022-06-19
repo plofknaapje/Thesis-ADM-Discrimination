@@ -1,6 +1,8 @@
 ---
 title: "Pre-processing measures"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
 # Imports
