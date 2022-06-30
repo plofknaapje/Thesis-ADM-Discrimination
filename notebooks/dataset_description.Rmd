@@ -23,14 +23,29 @@ head(df, 10)
 
 ## Characteristics
 ### Training dataset
-```{r}
+```{r echo=FALSE}
+print("Full dataset")
 summary(df)
+print("Test score SD, Rating SD")
+print(c(sd(df$test_score), sd(df$rating)))
+
+print("Accepted applicants")
 summary(filter(df, accepted))
+print("Test score SD, Rating SD")
+print(c(sd(filter(df, accepted)$test_score), sd(filter(df, accepted)$rating)))
+
+print("Not accepted applicants")
 summary(filter(df, !accepted))
+print("Test score SD, Rating SD")
+print(c(sd(filter(df, !accepted)$test_score), sd(filter(df, !accepted)$rating)))
+
 ```
 ### Test dataset
-```{r}
+```{r echo=FALSE}
 summary(df_test)
+print("Test score SD, Rating SD")
+print(c(sd(df_test$test_score), sd(df_test$rating)))
+
 ```
 
 # Metrics on the Dataset
