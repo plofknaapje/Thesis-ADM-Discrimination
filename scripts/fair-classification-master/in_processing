@@ -79,28 +79,34 @@ def selective_pred_sum(predictions, x_control, nationality, outcome):
                for i in range(len(predictions)))
 
 
-def preprocessing_X(df, intercept=False):
+def preprocessing_X(df, intercept=True):
     X = df.loc[:, ["test_score", "english_cert", "extracurricular"]]
     X["english_cert"] = X["english_cert"].astype(int)
     X["extracurricular"] = X["extracurricular"].astype(int)
-    return add_intercept(X.to_numpy())
+    if intercept:
+        return add_intercept(X.to_numpy())
+    else:
+        return X.to_numpy()
 
 
 if __name__ == '__main__':
 
     mapping_nat = {"Non_Dutch": "0", "Dutch": "1"}
     mapping_acc = {"True": "1", "False": "-1"}
-    df = pd.read_csv("../../data/selection.csv")
+    df = pd.read_csv("../../data/selection.csv").sample(frac=1)
     df_test = pd.read_csv("../../data/selection_test.csv")
+    df = pd.concat([df, df_test])
 
     y = np.array(df["accepted"].astype(str).replace(mapping_acc).astype(int))
-    X = preprocessing_X(df)
-    X_test = preprocessing_X(df_test)
+    X = preprocessing_X(df, intercept=True)
     x_control = {"nationality": np.array(df["nationality"].replace(mapping_nat).astype(int))}
 
-    print(X, type(X))
-    print(y, type(y))
-    print(x_control)
+    X_test = preprocessing_X(df_test, intercept=True)
+    x_test_control = {"nationality": np.array(df_test["nationality"].replace(mapping_nat).astype(int))}
+
+    # print(X, type(X))
+    # print(y, type(y))
+    # print(x_control)
 
     compute_p_rule(x_control["nationality"], y)
 
@@ -109,7 +115,7 @@ if __name__ == '__main__':
     names = ["x_train", "y_train", "x_control_train",
              "x_test", "y_test", "x_control_test"]
 
-    train_fold_size = 0.
+    train_fold_size = 0.5  # Train with the train data and test with the test data
     data = split_into_train_test(X, y, x_control, train_fold_size)
     for i in range(6):
         data_package[names[i]] = data[i]
@@ -131,16 +137,17 @@ if __name__ == '__main__':
     settings_def["sep_constraint"] = 0
 
     w_uncons, p_uncons, acc_uncons = train_test_classifier(
-        data_package, settings_def
+        data_package=data_package, settings=settings_def
     )
 
     """ Group Fairness """
+    print(w_uncons)
     predictions = np.sign(np.dot(X_test, w_uncons).tolist())
     outcomes = {
-        "Dutch_Pos": selective_pred_sum(predictions, x_control, 1, 1),
-        "Non_Dutch_Pos": selective_pred_sum(predictions, x_control, 0, 1),
-        "Dutch_Neg": selective_pred_sum(predictions, x_control, 1, -1),
-        "Non_Dutch_Neg": selective_pred_sum(predictions, x_control, 0, -1)
+        "Dutch_Pos": selective_pred_sum(predictions, x_test_control, 1, 1),
+        "Non_Dutch_Pos": selective_pred_sum(predictions, x_test_control, 0, 1),
+        "Dutch_Neg": selective_pred_sum(predictions, x_test_control, 1, -1),
+        "Non_Dutch_Neg": selective_pred_sum(predictions, x_test_control, 0, -1)
     }
 
     print(outcomes)
@@ -148,7 +155,9 @@ if __name__ == '__main__':
     print(
         "Non-Dutch: {0:.1f}%".format(outcomes["Non_Dutch_Pos"]/(outcomes["Non_Dutch_Pos"] + outcomes["Non_Dutch_Neg"])*100))
 
-    """ Optimize for accuracy while achieving perfect fairness """
+    """
+    ########
+    Optimize for accuracy while achieving perfect fairness """
     settings_fair = settings.copy()
     settings_fair["fairness"] = 1
     settings_fair["accuracy"] = 0
@@ -160,19 +169,19 @@ if __name__ == '__main__':
     w_f_cons, p_f_cons, acc_f_cons = train_test_classifier(
         data_package, settings_fair
     )
-    # plot_boundaries(w_uncons, w_f_cons, p_uncons, p_f_cons,
-    #                 acc_uncons, acc_f_cons, "img/f_cons.png")
 
-    """ Group Fairness """
+    print(w_f_cons)
     predictions = np.sign(np.dot(X_test, w_f_cons).tolist())
     outcomes = {
-        "Dutch_Pos": selective_pred_sum(predictions, x_control, 1, 1),
-        "Non_Dutch_Pos": selective_pred_sum(predictions, x_control, 0, 1),
-        "Dutch_Neg": selective_pred_sum(predictions, x_control, 1, -1),
-        "Non_Dutch_Neg": selective_pred_sum(predictions, x_control, 0, -1)
+        "Dutch_Pos": selective_pred_sum(predictions, x_test_control, 1, 1),
+        "Non_Dutch_Pos": selective_pred_sum(predictions, x_test_control, 0, 1),
+        "Dutch_Neg": selective_pred_sum(predictions, x_test_control, 1, -1),
+        "Non_Dutch_Neg": selective_pred_sum(predictions, x_test_control, 0, -1)
     }
 
     print(outcomes)
     print("Dutch: {0:.1f}%".format(outcomes["Dutch_Pos"]/(outcomes["Dutch_Pos"] + outcomes["Dutch_Neg"])*100))
     print(
         "Non-Dutch: {0:.1f}%".format(outcomes["Non_Dutch_Pos"]/(outcomes["Non_Dutch_Pos"] + outcomes["Non_Dutch_Neg"])*100))
+    # plot_boundaries(w_uncons, w_f_cons, p_uncons, p_f_cons,
+    #                 acc_uncons, acc_f_cons, "img/f_cons.png")

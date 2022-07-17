@@ -267,7 +267,9 @@ def compute_cross_validation_error(
 def print_classifier_fairness_stats(
         acc_arr, correlation_dict_arr, cov_dict_arr, s_attr_name):
 
+    print(correlation_dict_arr)
     correlation_dict = get_avg_correlation_dict(correlation_dict_arr)
+    print(correlation_dict)
     non_prot_pos = correlation_dict[s_attr_name][1][1]
     prot_pos = correlation_dict[s_attr_name][0][1]
     p_rule = (prot_pos / non_prot_pos) * 100.0
@@ -367,7 +369,7 @@ def check_accuracy(model, data_package, y_train_predicted, y_test_predicted):
     x_train = data_package["x_train"]
     y_train = data_package["y_train"]
 
-    if model is not None and y_test_predicted is not None:
+    if model is not None and (y_test_predicted is not None or y_train_predicted is not None):
         print("Either the model (w) or the predicted labels should be None")
         raise Exception(
             "Either the model (w) or the predicted labels should be None")
